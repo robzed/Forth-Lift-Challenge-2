@@ -7,7 +7,7 @@ Lift Challenge #2 from the Forth2020 forth programming language group
 
 There the Forth2020 Facebook group post challenges. This one is a #2 in the Lift Challenge Series
 
-https://docs.google.com/document/d/e/2PACX-1vTwYgkNJRoDjYE7CUL5EMKEmP7vlVcIcQpYio_GAuGAN940Y36JGNRturhMNjsZhcyRrBDB5AjtdUi0/pub?fbclid=IwAR1hIQoGnSgGRMXLbF04DwmPl373kJqzkNdzikdG4qiQThMaQJNv8WEQLmE   (A copy of this document is supplied in this repository as html).
+https://docs.google.com/document/d/e/2PACX-1vTwYgkNJRoDjYE7CUL5EMKEmP7vlVcIcQpYio_GAuGAN940Y36JGNRturhMNjsZhcyRrBDB5AjtdUi0/pub?fbclid=IwAR1hIQoGnSgGRMXLbF04DwmPl373kJqzkNdzikdG4qiQThMaQJNv8WEQLmE   (A copy of this document is supplied in this repository as html and an rtf file).
 
 https://www.facebook.com/groups/forth2020
 
