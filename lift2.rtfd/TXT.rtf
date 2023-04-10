@@ -1,0 +1,226 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2708
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\fnil\fcharset0 AppleColorEmoji;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue233;\red109\green109\blue109;
+}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c93333;\cssrgb\c50196\c50196\c50196;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww21460\viewh19120\viewkind0
+\deftab720
+\pard\pardeftab720\sa240\partightenfactor0
+
+\f0\fs24 \cf0 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Forth2020 Lift Challenge #2 - by Peter Jakacki\uc0\u8232 Updated: March 29 - 12:00 am UTC\u8232 {\field{\*\fldinst{HYPERLINK "https://www.google.com/url?q=https://www.facebook.com/groups/forth2020&sa=D&source=editors&ust=1681116699356219&usg=AOvVaw2wVokkZL8YJUDmCHRuUvFA"}}{\fldrslt \cf3 \ul \ulc3 \strokec3 Link to Forth2020 group}}\
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth15560\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 The Challenge\uc0\u8232 1 - Simulate some kind of lift graphics so we can see which buttons are pressed and where the lift is etc\u8232 2 - Process each floor\'92s UP/DOWN and the lift destination \'93buttons\'94 (console keys or real buttons etc)\u8232 3 - Make it respond like a real lift - if it is going up it will continue to do so if it still has floors requested..\u8232 4 - Only a single lift is used with a minimum of 6 floors and there is no need to go beyond 9 floors for this sim\u8232 5 - We are not concerned about the number of passengers or timing - just the sequence of actions needed\
+6 - Allow for a PLAY mode where a long sequence can be played back - (useful for testing entries)\uc0\u8232 \
+AIM OF THE CHALLENGE\uc0\u8232 Since we are promoting Forth we also want show how simple and elegant and readable Forth code can be. By all means get it functional but consider rewriting it if necessary so that you end up with a melodious song rather than a squawking dodo. If others can look at your code and understand it easily, then you are certainly on the right track. If you have read Thinking Forth you will have read about factoring and choosing sensible names that when joined together make a readable phrase. In the end you will have created what we call a \'93Domain Specific Language\'94 in Forth that you write your lift code in. \u8232 \u8232 QUESTIONS: \u8232 Will the 15th of April be enough time to complete this first phase of the challenge? (Oh yeah, there is more!)\cell \lastrow\row
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 \
+INTRO\
+\'a0 \'a0Someone mentioned some time ago about controlling lifts (elevators) with Forth and I think this will make a great Forth Challenge, not only for the Jedi Masters but also for Padawans and Knights. Even though writing a lift control program is not that simple, there are elements of it that anyone can do, especially before you actually start writing any control code. What do I mean?\uc0\u8232 \u8232 Think about this, if you are working on blinking an LED you normally have an LED hooked up for testing. If you are writing code for your little bot, you normally have the bot connected up for testing etc. But how do you install a multi storey lift in your workshop for testing? \u8232 \u8232 Ah, there\'92s the rub but this is the part that beginners can handle just as well by building your own. No, not a real one, just a virtual one, and since we are all familiar with lifts then we are familiar with the elements such as up/down buttons on each floor and floor select buttons in the lift. These are the basics but how can we create a virtual lift on an ESP32 or Pico or Bluepill? \u8232 \u8232 In the old days of computer graphics when the world was dominated by teletype machines or video terminals the bored geek would create art from ASCIi characters. The fact that much of this \'93art\'94 was of the curvaceous kind indicates the young age of these geeks and of the two things that were on their mind, code and curves. Computers may have changed but for many of us who use these powerful microcontroller chips we are still limited to serial ports. So let\'92s use them in a similar way, but instead of curves we will elevate our thinking and create a programatic animation of these floors, an indication of which up/down buttons have been pressed, and also which floors have been selected, and of course the position of the lift car itself. These are just the basics but good enough to start with.\u8232 \u8232 Here is an example of how that could look:\
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth3885\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth11594\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 {{\NeXTGraphic XdzAya9YpCBLahDceg2iWZhdgSDi9x91nagG2zELQxFRoa22e0LCOfhcuqDh6eltcOv6BcBnit8L99qh8XGe2lVfIh6XFjkpLRCsrtJFd7fM3GK-LgTOr8bB4KrI1R-Mwll1aSHeDE2zr8yLcNgLsRI.png \width7200 \height10600 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 \cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 \'a0In this graphic we can see that while the lift car is now at the \'93Forth\'94 floor and going up, that it would stop at the 5th floor since the up button has been pressed there.\
+\
+\'a0Afterwards it will travel to its destination on the 7th floor although in real-life people from the 5th floor might select another floor too. \
+\'a0Once it has reached the final floor it will proceed down to the 1st floor where perhaps impatient people have jabbed the up button many times already in the hope that it will make it go faster 
+\f1 \uc0\u55357 \u56898 
+\f0 \cell \lastrow\row
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 \uc0\u8232 Since any serial terminal can represent this, even a teletype if you happen to be a retro-geek, then this is something you can write some Forth code for that takes information from variables that represent the lift and floor request buttons, the number of floors and the current position of the lift car. Can you do that? Good!\u8232 \u8232 HINT:\'a0Define some words for floor and lift requests, so that you can type 5 UP to request a lift going up from the 5th floor (as shown). Conversely 8 DOWN would be someone on the 8th floor wanting to go down. In the lift you might press [1] to go to the 1st floor so in Forth we can type 1 GO which will select the 1st floor as a destination to stop at. Add another word to redraw the graphic as required and I like to clear the screen which also returns to the top \'a0(12 EMIT normally does this). \u8232 \u8232 At this stage you have a \'93working model\'94 that you can interact with. Getting to this stage is already an accomplishment, so well done young (or old) Padawan! \u8232 \u8232 \
+SCENARIO:\uc0\u8232 First thing in the morning the lift has been left at the 1st floor, and early Ed, the first person walks into the building and catches the lift to the 6th floor. In the meantime more people have entered the building and are pressing the UP button on the 1st floor. So the lift detects that request and comes back down to the 1st floor where it opens the door (optional) and people enter and press buttons. In this case we are not worried about how many people as it is a virtual lift with virtually unlimited capacity 
+\f1 \uc0\u55357 \u56898 
+\f0  \'a0and we are not worried about timing either, only the logical sequence of operation and being able to visualize the simulation.\uc0\u8232 \u8232 Now this second lot of people are in the lift and some press 2\'a0and some press 3\'a0and some press 6. Then the lift travels to the 2nd floor, then the 3rd, and then the 6th. Meanwhile Fred on the 3rd floor remembers he has left his laptop in his car parked outside, so he presses the DOWN button (*1). While the lift is coming back down to service this request there are many more people on the 1st floor banging that UP button madly, having run late for work.\u8232 \u8232 So the lift goes down and stops at the 3td floor where forgetful Fred presses the 1st floor button. The lift proceeds without incident to the 1st floor where Fred has to fight his way out past all the others cramming their way in.\
+\uc0\u8232 Then the couriers start turning up, going to many floors and the wrong floors. Create any fanciful sequence you perceive possible while others are still using the lift too. Don\'92t forget lunch time etc. In India the wives will have made some hot food for their working husbands which is now being delivered by dabbawalas in time for lunch! All those ups and downs!\u8232 \u8232 PLAY MODE\u8232 Rather than a purely random mode perhaps we could play back a sequence instead. We could simulate the whole day or lunch time etc and play back that sequence a bit like an old pianola and so you can use the exact same sequence to test improvements in the operation of your code. This same mode can be used to test various approaches as well as the entries to the challenge itself.\
+\
+FORTH CONSOLE OPERATION\uc0\u8232 We have to assume that the Forth you are using does not have multi-tasking so you are relying on the console for operating this simulation. What can happen is that you can have words to request UP or DOWN with a floor parameter so the lift knows which floor requested this. Then the lift car itself has buttons that are pressed by passing the floor number to a FLOOR word (or GO for short).\
+\uc0\u8232 BUTTONS\
+How might we run the above scenario from the Forth console?\
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth1281\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth1606\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 \
+\
+{{\NeXTGraphic F76DmgVnIhjv5TWj9eDQuWW2uBpuXCBCj5y-B-Oc_JJ8C84WkkyQ6RtR8Q-FoHzbpb4qlc5UalutWjIN7_vTu06Ij4tLrnIayRyMTXXc44ZSQg2JTnhWkKH3eV3heJpPEo7EGPQP8PgMvtko9Y3jV3I.png \width2640 \height4160 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\
+\cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 {{\NeXTGraphic PeIjXsd84jzjUUxA7SyMWzIjzvV8vNTwVI0e-HahZsJNCJJm9W9KARNCv4N1dlByuNqwgImNT-VIMc93OhbBl1l-Doz8WfvFaKU9FKW0Liqh2eR_T2BJ5eSod9oh9lLHiWEc3ZUcYefndLkd1AQ2l0M.png \width4720 \height10800 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 \cell \lastrow\row
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 \
+EDIT: I decided I would leave the main loop running continually with a 2 second delay each loop where it checks the buttons, computes the next move, and moves the lift up or down half a floor if needed while updating the display to show the position and also all the \'93lit buttons\'94 etc. So I detect console keys 1 to 9 and save them in a variable.\
+\'a0 Keys U D and G will take that variable and perform the UP DOWN or GO request. Hitting escape though exits the loop. Maybe it won\'92t hurt to display this variables etc along with the lift graphic as well, it\'92s up to you.\
+\
+My main loop:\
+\
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth5180\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth9046\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 {{\NeXTGraphic Hq97A4z72s2OTw3CimqdNfWMChzDbyvyuXRYsX5U-ZsFtw2T9GAPIne39cQ3wS-5oW3XYxzlrgWXJtxZxYVaHgCalmH3pBn2-yi3gBy1HV46Gw2jxvyWvoov8zcjTwkmHKNBd1TsH_xkVYmS1iWtZeA.png \width5180 \height3580 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 * SHOW draws the lift and floors and the state of the buttons\uc0\u8232 * COMPUTE works out what to do next (not so simple)\u8232 * STEP will then move the lift half a floor if necessary\
+* 2000 ms is slow enough to interact with the simulation\uc0\u8232 * ?BUTTONS checks for 1 to 9 and U D G and if ESC it returns with a true rather than a false\cell \lastrow\row
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 \
+Here is a purely console driven suggestion too:\
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrt\brdrnil \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 CONSOLE\cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 DESCRIPTION\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 1 UP\cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 Lift is already at the 1st floor so the door opens and Ed enters\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 6 GO\cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 ED presses the button for the 6th floor\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 RUN\cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 Run the lift operation at a slow rate for visual simulation. Any key to escape.\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 1 UP 1 UP 1 UP\cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 While the lift is ascending people are pressing buttons - let\'92s pretend etc\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 RUN\cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 Get that simulation running again, and ED makes it to the 6th floor\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 \cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 Now the lift comes down again towards the 1st floor\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 2 GO 3 GO 6 GO\cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 The doors open and people enter and press buttons for the 2nd, 3rd, and 6th.\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 RUN\cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 Run the lift operation at a slow rate for visual simulation. Any key to escape.\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 \cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 We see the lift stop at the 2nd floor and then shortly thereafter proceeds up\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 \cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 We see the lift sotp at the 3rd floor - and proceeds up\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 1 UP 1 UP 1 UP 1 UP RUN\cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 Late Larry and company are madly punching the UP button on the 1st floor.\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 3 DOWN RUN\cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 Fred needs to go get his laptop but the lift is still going up (keep it going)\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 \cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 The lift stops at the 6th floor then proceeds down to the 3rd for Fred\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 1 GO RUN\cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 Fred presses the 1st floor button although the lift is already going there\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 \cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 The lift makes it to the 1st floor while Fred struggles to get out.\cell \row
+
+\itap1\trowd \taflags0 \trgaph108\trleft-108 \trbrdrl\brdrnil \trbrdrt\brdrnil \trbrdrr\brdrnil 
+\clvertalc \clshdrawnil \clwWidth2658\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx4320
+\clvertalc \clshdrawnil \clwWidth7385\clftsWidth3 \clmart10 \clmarl10 \clmarb10 \clmarr10 \clbrdrt\brdrnil \clbrdrl\brdrnil \clbrdrb\brdrnil \clbrdrr\brdrnil \clpadt20 \clpadl20 \clpadb20 \clpadr20 \gaph\cellx8640
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 \cell 
+\pard\intbl\itap1\pardeftab720\sa240\partightenfactor0
+\cf0 Now they all get in and press buttons etc\cell \lastrow\row
+\pard\pardeftab720\sa240\partightenfactor0
+\cf0 \uc0\u8232 So in this operation we manually control the simulation although once it is running it proceeds at a slow enough rate to simulate the lift moving if it needs to and gives us enough time to interrupt the sim to introduce new requests from the console. Your Forth might need to look for an escape key during RUN perhaps or it might echo and preserve the key upon exit without needing an escape. Others may use a background polling routine or multitask the RUN operation in which case we don\'92t need to type RUN normally, although a HALT might be useful to give us time to debug our code.\u8232 \u8232 \u8232 \u8232 \u8232 NOTES:\u8232 There is no DOWN button on the 1st floor so we are not worried about basements, just floors or levels. Also too, there is no UP button on the top floor either for very obvious reasons. So 1 DOWN is ignored as is 6 UP if the top floor is 6 etc.\
+\
+We use the term lift and elevator interchangeably, and lift also refers to the car that carries people \'a0itself.\
+\
+The number of passengers or the number of times the buttons are pressed are irrelevant for this simulation and the purpose of this challenge. In reality even though the lift may weigh the load it really only responds to the requests anyway.\
+\uc0\u8232 *1 What if Fred had pressed the UP button by mistake?\
+}

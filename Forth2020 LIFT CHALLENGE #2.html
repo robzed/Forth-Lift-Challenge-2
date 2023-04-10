@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><title>Forth2020 LIFT CHALLENGE #2</title><link rel="shortcut icon" href="https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico"><meta name="referrer" content="strict-origin-when-cross-origin"><script nonce="">
+        var DOCS_timing = {};
+        var DOCS_drawing_load = {};
+        var DOCS_drawing_decode = {};
+
+        function DOCS_record_drawing_load(img) {
+          if (window.performance && window.performance.now) {
+            DOCS_drawing_load[img.id] = performance.now();
+
+            if (img.decode) {
+              img.decode().then(() => DOCS_drawing_decode[img.id] = performance.now());
+            }
+          }
+        }
+      </script><style nonce="">
+      @import url("https://fonts.googleapis.com/css?family=Google+Sans");
+      @import url("https://fonts.googleapis.com/css?family=Roboto");
+
+      body {
+        font-family: Roboto, arial, sans, sans-serif;
+        margin: 0;
+      }
+
+      iframe {
+        border: 0;
+        frameborder: 0;
+        height: 100%;
+        width: 100%;
+      }
+
+      #banners {
+        align-items: center;
+        background: white;
+        display: block;
+        justify-content: space-between;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 100;
+      }
+
+      #banners #publish-banner {
+        background-color: #e8f0fe;
+        border-bottom: 1px #ccc solid;
+        color: #202124;
+        display: flex;
+        flex: 1 1 0%;
+        height: 60px;
+        width: 100%;
+      }
+
+      #publish-banner-icon {
+        display: flex;
+        fill: #1967d2;
+        margin: auto 20px;
+      }
+
+      #publish-banner-text {
+        flex-grow: 1;
+        margin: auto 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      #publish-banner-buttons {
+        margin: auto 25px auto 0;
+      }
+
+      #publish-banner-buttons span {
+        align-self: center;
+        background-color: inherit;
+        border: none;
+        font-family: "Google Sans", Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+        margin: 0 16px 0 32px;
+      }
+
+      #publish-banner-buttons a {
+        color: #1967d2;
+        cursor: pointer;
+        font-family: "Google Sans", Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 24px;
+        text-decoration: none;
+      }
+
+      #banners #title-banner {
+        background: white;
+        border-bottom: 1px #ccc solid;
+        display: flex;
+        flex: 1 1 0%;
+        height: 60px;
+        width: 100%;
+      }
+
+      #banners #title-banner #title {
+        flex-grow: 1;
+        font-family: 'Google Sans';
+        font-size: large;
+        margin: auto 0 auto 20px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        width: 70%;
+      }
+
+      #banners #title-banner #interval {
+        margin: auto 25px auto 0;
+        font-family: Roboto;
+        font-size: small;;
+      }
+
+      #footer {
+        background: #f0f0f0;
+        border-bottom: 1px #ccc solid;
+        bottom: 0;
+        font-family: Roboto;
+        font-size: small;
+        padding: 10px 10px;
+        position: fixed;
+        text-align: center;
+        width: 100%;
+      }
+
+      @media only screen and (max-device-width: 800px) {
+        #banners #title-banner {
+          border-bottom-width: 5px;
+          height: auto;
+          display: block;
+        }
+
+        #banners #title-banner #title {
+          font-size: 3em;
+          margin: auto 0 auto 20px;
+          width: 90%;
+        }
+
+        #banners #title-banner #interval {
+          font-size: 1.5em;
+          margin: 10px 0 auto 25px;
+        }
+
+        #footer {
+          font-size: 2em;
+        }
+      }
+
+      .dash {
+        padding: 0 6px;
+      }
+
+    
+        #contents {
+          padding: 100px 20% 50px 20%;
+        }
+
+        @media only screen and (max-device-width: 800px) {
+          #contents {
+            padding: 150px 5% 80px;
+          }
+        }
+      </style></head><body><div id="banners"><div id="publish-banner"><span id="publish-banner-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"><path d="M11 7h2v2h-2zm0 4h2v6h-2zm1-9C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"></path></svg></span><div id="publish-banner-text">Published using Google Docs</div><div id="publish-banner-buttons"><span><a target="_blank" title="Learn more" href="https://support.google.com/docs/answer/183965">Learn More</a></span><span><a href="https://docs.google.com/u/0/abuse?id=AKkXjoySlfhH766rA74XGkRO7GKG71suDmQgCaEXduJjX4sADX6B5RLQ0G2b0PtzdvXqrwiFfccxtVZxlvYnN3U:0">Report Abuse</a></span></div></div><div id="title-banner"><div id="title">Forth2020 LIFT CHALLENGE #2</div><div id="interval"><span>Updated automatically every 5 minutes</span></div></div></div><div id="contents"><style type="text/css">@import url('https://themes.googleusercontent.com/fonts/css?kit=lhDjYqiy3mZ0x6ROQEUoUw');ol{margin:0;padding:0}table td,table th{padding:0}.c14{border-right-style:solid;padding:5pt 5pt 5pt 5pt;border-bottom-color:#000000;border-top-width:1pt;border-right-width:1pt;border-left-color:#000000;vertical-align:top;border-right-color:#000000;border-left-width:1pt;border-top-style:solid;border-left-style:solid;border-bottom-width:1pt;width:83.2pt;border-top-color:#000000;border-bottom-style:solid}.c20{border-right-style:solid;padding:5pt 5pt 5pt 5pt;border-bottom-color:#000000;border-top-width:1pt;border-right-width:1pt;border-left-color:#000000;vertical-align:top;border-right-color:#000000;border-left-width:1pt;border-top-style:solid;border-left-style:solid;border-bottom-width:1pt;width:223pt;border-top-color:#000000;border-bottom-style:solid}.c22{border-right-style:solid;padding:5pt 5pt 5pt 5pt;border-bottom-color:#000000;border-top-width:1pt;border-right-width:1pt;border-left-color:#000000;vertical-align:top;border-right-color:#000000;border-left-width:1pt;border-top-style:solid;border-left-style:solid;border-bottom-width:1pt;width:218.2pt;border-top-color:#000000;border-bottom-style:solid}.c16{border-right-style:solid;padding:5pt 5pt 5pt 5pt;border-bottom-color:#000000;border-top-width:1pt;border-right-width:1pt;border-left-color:#000000;vertical-align:top;border-right-color:#000000;border-left-width:1pt;border-top-style:solid;border-left-style:solid;border-bottom-width:1pt;width:573.7pt;border-top-color:#000000;border-bottom-style:solid}.c7{border-right-style:solid;padding:5pt 5pt 5pt 5pt;border-bottom-color:#000000;border-top-width:1pt;border-right-width:1pt;border-left-color:#000000;vertical-align:top;border-right-color:#000000;border-left-width:1pt;border-top-style:solid;border-left-style:solid;border-bottom-width:1pt;width:395.2pt;border-top-color:#000000;border-bottom-style:solid}.c18{border-right-style:solid;padding:5pt 5pt 5pt 5pt;border-bottom-color:#000000;border-top-width:1pt;border-right-width:1pt;border-left-color:#000000;vertical-align:top;border-right-color:#000000;border-left-width:1pt;border-top-style:solid;border-left-style:solid;border-bottom-width:1pt;width:346.5pt;border-top-color:#000000;border-bottom-style:solid}.c4{border-right-style:solid;padding:5pt 5pt 5pt 5pt;border-bottom-color:#000000;border-top-width:1pt;border-right-width:1pt;border-left-color:#000000;vertical-align:top;border-right-color:#000000;border-left-width:1pt;border-top-style:solid;border-left-style:solid;border-bottom-width:1pt;width:176.2pt;border-top-color:#000000;border-bottom-style:solid}.c19{border-right-style:solid;padding:5pt 5pt 5pt 5pt;border-bottom-color:#000000;border-top-width:1pt;border-right-width:1pt;border-left-color:#000000;vertical-align:top;border-right-color:#000000;border-left-width:1pt;border-top-style:solid;border-left-style:solid;border-bottom-width:1pt;width:87pt;border-top-color:#000000;border-bottom-style:solid}.c17{border-right-style:solid;padding:5pt 5pt 5pt 5pt;border-bottom-color:#000000;border-top-width:1pt;border-right-width:1pt;border-left-color:#000000;vertical-align:top;border-right-color:#000000;border-left-width:1pt;border-top-style:solid;border-left-style:solid;border-bottom-width:1pt;width:173pt;border-top-color:#000000;border-bottom-style:solid}.c0{color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:11pt;font-family:"Arial";font-style:normal}.c1{color:#000000;font-weight:400;text-decoration:none;vertical-align:baseline;font-size:11pt;font-family:"Consolas";font-style:normal}.c11{color:#000000;text-decoration:none;vertical-align:baseline;font-size:11pt;font-family:"Arial";font-style:normal}.c10{padding-top:0pt;padding-bottom:0pt;line-height:1.15;orphans:2;widows:2;text-align:center}.c2{padding-top:0pt;padding-bottom:0pt;line-height:1.15;orphans:2;widows:2;text-align:left}.c3{border-spacing:0;border-collapse:collapse;margin-right:auto}.c21{text-decoration-skip-ink:none;-webkit-text-decoration-skip:none;color:#1155cc;text-decoration:underline}.c5{padding-top:0pt;padding-bottom:0pt;line-height:1.0;text-align:left}.c12{background-color:#ffffff;max-width:573.7pt;padding:10.8pt 10.8pt 10.8pt 10.8pt}.c15{color:inherit;text-decoration:inherit}.c6{height:0pt}.c9{height:11pt}.c8{font-weight:700}.c13{font-size:14pt}.title{padding-top:0pt;color:#000000;font-size:26pt;padding-bottom:3pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}.subtitle{padding-top:0pt;color:#666666;font-size:15pt;padding-bottom:16pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}li{color:#000000;font-size:11pt;font-family:"Arial"}p{margin:0;color:#000000;font-size:11pt;font-family:"Arial"}h1{padding-top:20pt;color:#000000;font-size:20pt;padding-bottom:6pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h2{padding-top:18pt;color:#000000;font-size:16pt;padding-bottom:6pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h3{padding-top:16pt;color:#434343;font-size:14pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h4{padding-top:14pt;color:#666666;font-size:12pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h5{padding-top:12pt;color:#666666;font-size:11pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left}h6{padding-top:12pt;color:#666666;font-size:11pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;font-style:italic;orphans:2;widows:2;text-align:left}</style><div class="c12 doc-content"><p class="c2 c9"><span class="c0"></span></p><p class="c2"><span class="c8 c13">Forth2020 Lift Challenge #2 - </span><span class="c13">by Peter Jakacki</span><span><br>Updated: March 29 - 12:00 am UTC<br></span><span class="c8 c21"><a class="c15" href="https://www.google.com/url?q=https://www.facebook.com/groups/forth2020&amp;sa=D&amp;source=editors&amp;ust=1681116699356219&amp;usg=AOvVaw2wVokkZL8YJUDmCHRuUvFA">Link to Forth2020 group</a></span><span class="c0"><br></span></p><a id="t.23193cd4b5b7548ef679b11c533cf4c3f305297c"></a><a id="t.0"></a><table class="c3"><tbody><tr class="c6"><td class="c16" colspan="1" rowspan="1"><p class="c5"><span class="c8">The Challenge<br></span><span class="c0">1 - Simulate some kind of lift graphics so we can see which buttons are pressed and where the lift is etc<br>2 - Process each floor’s UP/DOWN and the lift destination “buttons” (console keys or real buttons etc)<br>3 - Make it respond like a real lift - if it is going up it will continue to do so if it still has floors requested..<br>4 - Only a single lift is used with a minimum of 6 floors and there is no need to go beyond 9 floors for this sim<br>5 - We are not concerned about the number of passengers or timing - just the sequence of actions needed</span></p><p class="c5"><span class="c0">6 - Allow for a PLAY mode where a long sequence can be played back - (useful for testing entries)<br><br></span></p><p class="c5"><span class="c8">AIM OF THE CHALLENGE<br></span><span class="c0">Since
+ we are promoting Forth we also want show how simple and elegant and 
+readable Forth code can be. By all means get it functional but consider 
+rewriting it if necessary so that you end up with a melodious song 
+rather than a squawking dodo. If others can look at your code and 
+understand it easily, then you are certainly on the right track. If you 
+have read Thinking Forth you will have read about factoring and choosing
+ sensible names that when joined together make a readable phrase. In the
+ end you will have created what we call a “Domain Specific Language” in 
+Forth that you write your lift code in. <br><br>QUESTIONS: <br>Will the 15th of April be enough time to complete this first phase of the challenge? (Oh yeah, there is more!)<br></span></p></td></tr></tbody></table><p class="c2 c9"><span class="c0"></span></p><p class="c2"><span class="c11 c8">INTRO</span></p><p class="c2"><span class="c0">&nbsp;
+ &nbsp;Someone mentioned some time ago about controlling lifts 
+(elevators) with Forth and I think this will make a great Forth 
+Challenge, not only for the Jedi Masters but also for Padawans and 
+Knights. Even though writing a lift control program is not that simple, 
+there are elements of it that anyone can do, especially before you 
+actually start writing any control code. What do I mean?<br><br>Think 
+about this, if you are working on blinking an LED you normally have an 
+LED hooked up for testing. If you are writing code for your little bot, 
+you normally have the bot connected up for testing etc. But how do you 
+install a multi storey lift in your workshop for testing? <br><br>Ah, 
+there’s the rub but this is the part that beginners can handle just as 
+well by building your own. No, not a real one, just a virtual one, and 
+since we are all familiar with lifts then we are familiar with the 
+elements such as up/down buttons on each floor and floor select buttons 
+in the lift. These are the basics but how can we create a virtual lift 
+on an ESP32 or Pico or Bluepill? <br><br>In the old days of computer 
+graphics when the world was dominated by teletype machines or video 
+terminals the bored geek would create art from ASCIi characters. The 
+fact that much of this “art” was of the curvaceous kind indicates the 
+young age of these geeks and of the two things that were on their mind, 
+code and curves. Computers may have changed but for many of us who use 
+these powerful microcontroller chips we are still limited to serial 
+ports. So let’s use them in a similar way, but instead of curves we will
+ elevate our thinking and create a programatic animation of these 
+floors, an indication of which up/down buttons have been pressed, and 
+also which floors have been selected, and of course the position of the 
+lift car itself. These are just the basics but good enough to start 
+with.<br><br>Here is an example of how that could look:</span></p><a id="t.9c5fff576966f6e46a8201c579470099f7136ccf"></a><a id="t.1"></a><table class="c3"><tbody><tr class="c6"><td class="c17" colspan="1" rowspan="1"><p class="c2"><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 194.27px; height: 285.92px;"><img alt="" src="Forth2020%20LIFT%20CHALLENGE%20%232_files/pasted%2520image%25200_003.png" style="width: 194.27px; height: 285.92px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span></p></td><td class="c20" colspan="1" rowspan="1"><p class="c5"><span class="c0">&nbsp;In
+ this graphic we can see that while the lift car is now at the “Forth” 
+floor and going up, that it would stop at the 5th floor since the up 
+button has been pressed there.</span></p><p class="c5 c9"><span class="c0"></span></p><p class="c5"><span class="c0">&nbsp;Afterwards
+ it will travel to its destination on the 7th floor although in 
+real-life people from the 5th floor might select another floor too. <br></span></p><p class="c5"><span class="c0">&nbsp;Once
+ it has reached the final floor it will proceed down to the 1st floor 
+where perhaps impatient people have jabbed the up button many times 
+already in the hope that it will make it go faster 🙂<br></span></p></td></tr></tbody></table><p class="c2"><span><br>
+ Since any serial terminal can represent this, even a teletype if you 
+happen to be a retro-geek, then this is something you can write some 
+Forth code for that takes information from variables that represent the 
+lift and floor request buttons, the number of floors and the current 
+position of the lift car. Can you do that? Good!<br><br></span><span class="c8">HINT:</span><span class="c0">&nbsp;Define
+ some words for floor and lift requests, so that you can type 5 UP to 
+request a lift going up from the 5th floor (as shown). Conversely 8 DOWN
+ would be someone on the 8th floor wanting to go down. In the lift you 
+might press [1] to go to the 1st floor so in Forth we can type 1 GO 
+which will select the 1st floor as a destination to stop at. Add another
+ word to redraw the graphic as required and I like to clear the screen 
+which also returns to the top &nbsp;(12 EMIT normally does this). <br><br>At
+ this stage you have a “working model” that you can interact with. 
+Getting to this stage is already an accomplishment, so well done young 
+(or old) Padawan! <br><br><br></span></p><p class="c2"><span class="c8">SCENARIO:<br></span><span>First
+ thing in the morning the lift has been left at the 1st floor, and early
+ Ed, the first person walks into the building and catches the lift to 
+the 6th floor. In the meantime more people have entered the building and
+ are pressing the UP button on the 1st floor. So the lift detects that 
+request and comes back down to the 1st floor where it opens the door 
+(optional) and people enter and press buttons. In this case we are not 
+worried about how many people as it is a virtual lift with virtually 
+unlimited capacity 🙂 &nbsp;and we are not worried about timing either, 
+only the logical sequence of operation and being able to visualize the 
+simulation.<br><br>Now this second lot of people are in the lift and some press </span><span class="c8">2</span><span>&nbsp;and some press </span><span class="c8">3</span><span>&nbsp;and some press </span><span class="c8">6</span><span class="c0">.
+ Then the lift travels to the 2nd floor, then the 3rd, and then the 6th.
+ Meanwhile Fred on the 3rd floor remembers he has left his laptop in his
+ car parked outside, so he presses the DOWN button (*1). While the lift 
+is coming back down to service this request there are many more people 
+on the 1st floor banging that UP button madly, having run late for work.<br><br>So
+ the lift goes down and stops at the 3td floor where forgetful Fred 
+presses the 1st floor button. The lift proceeds without incident to the 
+1st floor where Fred has to fight his way out past all the others 
+cramming their way in. </span></p><p class="c2"><span><br>Then the 
+couriers start turning up, going to many floors and the wrong floors. 
+Create any fanciful sequence you perceive possible while others are 
+still using the lift too. Don’t forget lunch time etc. In India the 
+wives will have made some hot food for their working husbands which is 
+now being delivered by dabbawalas in time for lunch! All those ups and 
+downs!<br><br></span><span class="c8">PLAY MODE<br></span><span class="c0">Rather
+ than a purely random mode perhaps we could play back a sequence 
+instead. We could simulate the whole day or lunch time etc and play back
+ that sequence a bit like an old pianola and so you can use the exact 
+same sequence to test improvements in the operation of your code. This 
+same mode can be used to test various approaches as well as the entries 
+to the challenge itself.</span></p><p class="c2 c9"><span class="c0"><br></span></p><p class="c2"><span class="c8">FORTH CONSOLE OPERATION<br></span><span class="c0">We
+ have to assume that the Forth you are using does not have multi-tasking
+ so you are relying on the console for operating this simulation. What 
+can happen is that you can have words to request UP or DOWN with a floor
+ parameter so the lift knows which floor requested this. Then the lift 
+car itself has buttons that are pressed by passing the floor number to a
+ FLOOR word (or GO for short). </span></p><p class="c2"><span><br></span><span class="c8 c11">BUTTONS</span></p><p class="c2"><span class="c0">How might we run the above scenario from the Forth console? </span></p><a id="t.4c8dd7eeb77eb986704de46f248e2941b309d40e"></a><a id="t.2"></a><table class="c3"><tbody><tr class="c6"><td class="c14" colspan="1" rowspan="1"><p class="c9 c10"><span class="c0"></span></p><p class="c10 c9"><span class="c0"></span></p><p class="c10"><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 64.10px; height: 101.49px;"><img alt="" src="Forth2020%20LIFT%20CHALLENGE%20%232_files/pasted%2520image%25200_002.png" style="width: 64.10px; height: 101.49px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span></p><p class="c10 c9"><span class="c0"></span></p></td><td class="c19" colspan="1" rowspan="1"><p class="c10"><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 80.35px; height: 184.98px;"><img alt="" src="Forth2020%20LIFT%20CHALLENGE%20%232_files/pasted%2520image%25200_004.png" style="width: 80.35px; height: 184.98px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span></p></td></tr></tbody></table><p class="c2 c9"><span class="c0"></span></p><p class="c2"><span class="c0">EDIT:
+ I decided I would leave the main loop running continually with a 2 
+second delay each loop where it checks the buttons, computes the next 
+move, and moves the lift up or down half a floor if needed while 
+updating the display to show the position and also all the “lit buttons”
+ etc. So I detect console keys 1 to 9 and save them in a variable. </span></p><p class="c2"><span class="c0">&nbsp;
+ Keys U D and G will take that variable and perform the UP DOWN or GO 
+request. Hitting escape though exits the loop. Maybe it won’t hurt to 
+display this variables etc along with the lift graphic as well, it’s up 
+to you.</span></p><p class="c2 c9"><span class="c0"></span></p><p class="c2"><span class="c0">My main loop:</span></p><p class="c2 c9"><span class="c0"></span></p><a id="t.83d2bf854f0ec0c761cf210ca249308d8ea2d635"></a><a id="t.3"></a><table class="c3"><tbody><tr class="c6"><td class="c22" colspan="1" rowspan="1"><p class="c2"><span style="overflow: hidden; display: inline-block; margin: 0.00px 0.00px; border: 0.00px solid #000000; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px); width: 259.00px; height: 179.00px;"><img alt="" src="Forth2020%20LIFT%20CHALLENGE%20%232_files/pasted%20image%200.png" style="width: 259.00px; height: 179.00px; margin-left: 0.00px; margin-top: 0.00px; transform: rotate(0.00rad) translateZ(0px); -webkit-transform: rotate(0.00rad) translateZ(0px);" title=""></span></p></td><td class="c18" colspan="1" rowspan="1"><p class="c2"><span class="c0">* SHOW draws the lift and floors and the state of the buttons<br>* COMPUTE works out what to do next (not so simple)<br>* STEP will then move the lift half a floor if necessary</span></p><p class="c2"><span class="c0">* 2000 ms is slow enough to interact with the simulation<br>* ?BUTTONS checks for 1 to 9 and U D G and if ESC it returns with a true rather than a false</span></p></td></tr></tbody></table><p class="c2 c9"><span class="c0"></span></p><p class="c2"><span class="c0">Here is a purely console driven suggestion too:</span></p><a id="t.5c6b9a8bc198dba507ab1acf49515c55ae2a696a"></a><a id="t.4"></a><table class="c3"><tbody><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5"><span class="c11 c8">CONSOLE</span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c11 c8">DESCRIPTION</span></p></td></tr><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5"><span class="c1">1 UP</span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c0">Lift is already at the 1st floor so the door opens and Ed enters</span></p></td></tr><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5"><span class="c1">6 GO</span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c0">ED presses the button for the 6th floor</span></p></td></tr><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5"><span class="c1">RUN</span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c0">Run the lift operation at a slow rate for visual simulation. Any key to escape.</span></p></td></tr><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5"><span class="c1">1 UP 1 UP 1 UP</span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c0">While the lift is ascending people are pressing buttons - let’s pretend etc</span></p></td></tr><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5"><span class="c1">RUN</span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c0">Get that simulation running again, and ED makes it to the 6th floor</span></p></td></tr><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5 c9"><span class="c1"></span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c0">Now the lift comes down again towards the 1st floor</span></p></td></tr><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5"><span class="c1">2 GO 3 GO 6 GO</span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c0">The doors open and people enter and press buttons for the 2nd, 3rd, and 6th.</span></p></td></tr><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5"><span class="c1">RUN</span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c0">Run the lift operation at a slow rate for visual simulation. Any key to escape.</span></p></td></tr><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5 c9"><span class="c1"></span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c0">We see the lift stop at the 2nd floor and then shortly thereafter proceeds up</span></p></td></tr><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5 c9"><span class="c1"></span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c0">We see the lift sotp at the 3rd floor - and proceeds up</span></p></td></tr><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5"><span class="c1">1 UP 1 UP 1 UP 1 UP RUN</span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c0">Late Larry and company are madly punching the UP button on the 1st floor.</span></p></td></tr><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5"><span class="c1">3 DOWN RUN</span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c0">Fred needs to go get his laptop but the lift is still going up (keep it going)</span></p></td></tr><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5 c9"><span class="c1"></span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c0">The lift stops at the 6th floor then proceeds down to the 3rd for Fred</span></p></td></tr><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5"><span class="c1">1 GO RUN</span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c0">Fred presses the 1st floor button although the lift is already going there</span></p></td></tr><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5 c9"><span class="c0"></span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c0">The lift makes it to the 1st floor while Fred struggles to get out.</span></p></td></tr><tr class="c6"><td class="c4" colspan="1" rowspan="1"><p class="c5 c9"><span class="c0"></span></p></td><td class="c7" colspan="1" rowspan="1"><p class="c5"><span class="c0">Now they all get in and press buttons etc</span></p></td></tr></tbody></table><p class="c2"><span><br>So
+ in this operation we manually control the simulation although once it 
+is running it proceeds at a slow enough rate to simulate the lift moving
+ if it needs to and gives us enough time to interrupt the sim to 
+introduce new requests from the console. Your Forth might need to look 
+for an escape key during RUN perhaps or it might echo and preserve the 
+key upon exit without needing an escape. Others may use a background 
+polling routine or multitask the RUN operation in which case we don’t 
+need to type RUN normally, although a HALT might be useful to give us 
+time to debug our code.<br><br><br><br><br></span><span class="c8">NOTES:</span><span class="c0"><br>There
+ is no DOWN button on the 1st floor so we are not worried about 
+basements, just floors or levels. Also too, there is no UP button on the
+ top floor either for very obvious reasons. So 1 DOWN is ignored as is 6
+ UP if the top floor is 6 etc.</span></p><p class="c2 c9"><span class="c0"></span></p><p class="c2"><span class="c0">We use the term lift and elevator interchangeably, and lift also refers to the car that carries people &nbsp;itself.</span></p><p class="c2 c9"><span class="c0"></span></p><p class="c2"><span class="c0">The
+ number of passengers or the number of times the buttons are pressed are
+ irrelevant for this simulation and the purpose of this challenge. In 
+reality even though the lift may weigh the load it really only responds 
+to the requests anyway. </span></p><p class="c2"><span><br>*1 What if Fred had pressed the UP button by mistake?</span></p><p class="c2 c9"><span class="c0"></span></p></div></div><script nonce="">(function(){/*
+
+ Copyright The Closure Library Authors.
+ SPDX-License-Identifier: Apache-2.0
+*/
+function k(){return function(){}}var aa="function"==typeof Object.create?Object.create:function(a){function b(){}b.prototype=a;return new b},ba="function"==typeof Object.defineProperties?Object.defineProperty:function(a,b,c){if(a==Array.prototype||a==Object.prototype)return a;a[b]=c.value;return a};
+function ca(a){a=["object"==typeof globalThis&&globalThis,a,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var b=0;b<a.length;++b){var c=a[b];if(c&&c.Math==Math)return c}throw Error("Cannot find global object");}var da=ca(this);function l(a,b){if(b)a:{var c=da;a=a.split(".");for(var d=0;d<a.length-1;d++){var e=a[d];if(!(e in c))break a;c=c[e]}a=a[a.length-1];d=c[a];b=b(d);b!=d&&null!=b&&ba(c,a,{configurable:!0,writable:!0,value:b})}}var m;
+if("function"==typeof Object.setPrototypeOf)m=Object.setPrototypeOf;else{var n;a:{var ea={a:!0},fa={};try{fa.__proto__=ea;n=fa.a;break a}catch(a){}n=!1}m=n?function(a,b){a.__proto__=b;if(a.__proto__!==b)throw new TypeError(a+" is not extensible");return a}:null}var ha=m;
+function p(a,b){a.prototype=aa(b.prototype);a.prototype.constructor=a;if(ha)ha(a,b);else for(var c in b)if("prototype"!=c)if(Object.defineProperties){var d=Object.getOwnPropertyDescriptor(b,c);d&&Object.defineProperty(a,c,d)}else a[c]=b[c];a.m=b.prototype}l("Object.is",function(a){return a?a:function(b,c){return b===c?0!==b||1/b===1/c:b!==b&&c!==c}});
+l("String.fromCodePoint",function(a){return a?a:function(b){for(var c="",d=0;d<arguments.length;d++){var e=Number(arguments[d]);if(0>e||1114111<e||e!==Math.floor(e))throw new RangeError("invalid_code_point "+e);65535>=e?c+=String.fromCharCode(e):(e-=65536,c+=String.fromCharCode(e>>>10&1023|55296),c+=String.fromCharCode(e&1023|56320))}return c}});
+l("Array.prototype.find",function(a){return a?a:function(b,c){a:{var d=this;d instanceof String&&(d=String(d));for(var e=d.length,f=0;f<e;f++){var g=d[f];if(b.call(c,g,f,d)){b=g;break a}}b=void 0}return b}});var q=this||self;function r(a){var b=typeof a;return"object"==b&&null!=a||"function"==b}function ia(a,b){var c=Array.prototype.slice.call(arguments,1);return function(){var d=c.slice();d.push.apply(d,arguments);return a.apply(this,d)}}
+function ja(a,b){function c(){}c.prototype=b.prototype;a.m=b.prototype;a.prototype=new c;a.prototype.constructor=a;a.D=function(d,e,f){for(var g=Array(arguments.length-2),h=2;h<arguments.length;h++)g[h-2]=arguments[h];return b.prototype[e].apply(d,g)}}function t(a){return a};function u(a){u[" "](a);return a}u[" "]=k();function ka(a,b,c){return Object.prototype.hasOwnProperty.call(a,b)?a[b]:a[b]=c(b)};function la(a){return ka(a.prototype,"$$generatedClassName",function(){return"Class$obf_"+{valueOf:function(){return++ma}}})}var ma=1E3;function w(){}w.prototype.u=function(){return this.j||(Object.defineProperties(this,{j:{value:na=na+1|0,enumerable:!1}}),this.j)};w.prototype.toString=function(){var a=x(y(oa(this.constructor)))+"@";var b=(this.u()>>>0).toString(16);return a+x(b)};function z(){}p(z,w);z.prototype.h=function(a){this.g=a;pa(a,this)};function qa(a){a.g instanceof Error&&(Error.captureStackTrace?Error.captureStackTrace(a.g):a.g.stack=Error().stack)}z.prototype.toString=function(){var a=y(oa(this.constructor)),b=this.l;return null==b?a:x(a)+": "+x(b)};function ra(a){if(null!=a){var b=a.A;if(b)return b}a instanceof TypeError?(b=new sa,b.l=x(a),qa(b),b.i=a,b.h(new TypeError(b)),a=b):(b=new A,b.l=x(a),qa(b),b.i=a,b.h(Error(b)),a=b);return a};function B(){}p(B,z);function C(){}p(C,B);function A(){}p(A,C);A.prototype.h=function(a){C.prototype.h.call(this,"__noinit__"===this.i?a:this.i)};function sa(){}p(sa,A);var na=0;function pa(a,b){if(a instanceof Object)try{a.A=b,Object.defineProperties(a,{cause:{get:function(){return b.s&&b.s.g}}})}catch(c){}};function x(a){return null==a?"null":a.toString()}function ta(a,b){var c=a.length,d,e=(d=b,b=b+1|0,d);d="string"===typeof a?a.charCodeAt(e):a.g(e);var f;if(c=55296<=d&&56319>=d&&b<c)a=f="string"===typeof a?a.charCodeAt(b):a.g(b),c=56320<=a&&57343>=a;var g;c?g=65536+((d&1023)<<10)+(f&1023)|0:g=d;return g};function D(){}var ua,va;p(D,w);function wa(){wa=k();va=new E;ua=new F};function E(){}p(E,D);E.prototype.toString=function(){return""};function F(){}p(F,D);F.prototype.toString=function(){return"unknown"};function G(a,b){this.g=a;this.h=b}p(G,w);function y(a){if(0!=a.h){var b="L"+x(la(a.g))+";";a=a.h;for(var c="",d=0;d<a;d=d+1|0)c=x(c)+"[";return x(c)+x(b)}return la(a.g)}G.prototype.toString=function(){return"class "+x(y(this))};function oa(a){return ka(a.prototype,"$$class/0",function(){return new G(a,0)})};function xa(a){var b=a;try{var c;if(c="www.google.com"===ya(a)){var d=za(a);c="/url"===H(d[5],!0)}if(c){var e=Aa(a,"q");b=e?e:Aa(a,"url")}}catch(f){if(f=ra(f),!(f instanceof B))throw f.g;}return null!=b?b:""};function H(a,b){return null==a?a:b?decodeURI(a):decodeURIComponent(a)};var Ba;function za(a){I();a=Ba.exec(a);for(var b=[],c=0;7>=c;c=c+1|0)a.length<=c||null==a[c]?b.push(null):b.push(a[c]);return b}function ya(a){a=za(a);return H(a[3],!0)}
+function Aa(a,b){I();var c=String.fromCodePoint(35);c=a.indexOf(c);c=0>c?a.length:c;a:{var d=0;for(var e=b.length;0<(d=a.indexOf(b,d))&&d<c;){var f=ta(a,d-1|0);if(38==f||63==f){if((d+e|0)>=a.length)break a;f=ta(a,d+e|0);if(61==f||38==f||35==f)break a}d=d+(e+1)|0}d=-1}if(0>d)return null;e=d;f=String.fromCodePoint(38);e=a.indexOf(f,e);if(0>e||e>c)e=c;d=d+(b.length+1)|0;b=Math.min(a.length,d);a=a.substr(b,Math.min(a.length,Math.max(d,e))-b|0);b=RegExp("\\+","g");d=" ";for(c=0;0<=(c=d.indexOf("\\",c));)36==
+d.charCodeAt(c+1|0)?(e=x(d.substr(0,c|0))+"$",f=c=c+1|0,d=e+x(d.substr(f))):(e=x(d.substr(0,c|0)),f=c=c+1|0,d=e+x(d.substr(f)));a=a.replace(b,d);return H(a,!1)}function I(){I=k();Ba=RegExp("^(?:([^:/?#.]+):)?(?://(?:([^/?#]*)@)?([^/#?]*?)(?::([0-9]+))?(?=[/#?]|$))?([^?#]+)?(?:\\?([^#]*))?(?:#([\\S\\s]*))?$")};function Ca(){Ca=k();Da||Ea()};var Fa,J;a:{for(var Ga=["CLOSURE_FLAGS"],K=q,Ha=0;Ha<Ga.length;Ha++)if(K=K[Ga[Ha]],null==K){J=null;break a}J=K}var Ia=J&&J[610401301];Fa=null!=Ia?Ia:!1;var Ja=/&/g,Ka=/</g,La=/>/g,Ma=/"/g,Na=/'/g,Oa=/\x00/g,Pa=/[\x00&<>"']/;var Qa=null,L,Ra=q.navigator;L=Ra?Ra.userAgentData||null:null;function M(){var a;if(null==Qa)a:{if(a=q.navigator)if(a=a.userAgent)break a;a=""}else a=Qa;return a}function N(a){return-1!=M().indexOf(a)};function Sa(){if(!Fa)return!1;var a=L;return!!a&&0<a.brands.length}function Ta(a){a.forEach(k())}function Ua(){for(var a=M(),b=RegExp("([A-Z][\\w ]+)/([^\\s]+)\\s*(?:\\((.*?)\\))?","g"),c=[],d;d=b.exec(a);)c.push([d[1],d[2],d[3]||void 0]);Ta(c)}function Ea(){Sa()?L.brands.find(function(a){return"Firefox"===a.brand}):Ua()};var Va=Array.prototype.indexOf?function(a,b){return Array.prototype.indexOf.call(a,b,void 0)}:function(a,b){if("string"===typeof a)return"string"!==typeof b||1!=b.length?-1:a.indexOf(b,0);for(var c=0;c<a.length;c++)if(c in a&&a[c]===b)return c;return-1};var Wa=Sa()?!1:N("Trident")||N("MSIE"),Xa=N("Edge")||Wa,Ya=N("Gecko")&&!(-1!=M().toLowerCase().indexOf("webkit")&&!N("Edge"))&&!(N("Trident")||N("MSIE"))&&!N("Edge"),Da=-1!=M().toLowerCase().indexOf("webkit")&&!N("Edge"),Za;if(Fa){var $a=L;Za=!!$a&&!!$a.platform}else Za=!1;var ab=Za?"macOS"===L.platform:N("Macintosh");function bb(a){a&&"function"==typeof a.v&&a.v()};function O(){this.h=this.h;this.g=this.g}O.prototype.h=!1;O.prototype.v=function(){this.h||(this.h=!0,this.j())};O.prototype.j=function(){if(this.g)for(;this.g.length;)this.g.shift()()};function cb(a,b,c){for(var d in a)b.call(c,a[d],d,a)};var P;function Q(a,b){this.i=a===db&&b||"";this.j=eb}Q.prototype.h=!0;Q.prototype.g=function(){return this.i};var eb={},db={};function R(a,b){this.i=b===S?a:""}R.prototype.toString=function(){return this.i.toString()};R.prototype.h=!0;R.prototype.g=function(){return this.i.toString()};function T(a){return a instanceof R&&a.constructor===R?a.i:"type_error:SafeUrl"}var fb=/^data:(.*);base64,[a-z0-9+\/]+=*$/i,gb=/^(?:(?:https?|mailto|ftp):|[^:/?#]*(?:[/?#]|$))/i,hb;try{new URL("s://g"),hb=!0}catch(a){hb=!1}var ib=hb;
+function jb(a){if(a instanceof R)return a;a="object"==typeof a&&a.h?a.g():String(a);a:{var b=a;if(ib){try{var c=new URL(b)}catch(d){b="https:";break a}b=c.protocol}else b:{c=document.createElement("a");try{c.href=b}catch(d){b=void 0;break b}b=c.protocol;b=":"===b||""===b?"https:":b}}"javascript:"!==b||(a="about:invalid#zClosurez");return new R(a,S)}var S={},kb=new R("about:invalid#zClosurez",S);var lb={};function U(a,b){this.i=b===lb?a:"";this.h=!0}U.prototype.g=function(){return this.i.toString()};U.prototype.toString=function(){return this.i.toString()};function mb(a,b,c,d){a=a instanceof R?a:jb(a);b=b||q;c=c instanceof Q?c instanceof Q&&c.constructor===Q&&c.j===eb?c.i:"type_error:Const":c||"";return void 0!==d?b.open(T(a),c,d):b.open(T(a),c)};function nb(a,b){this.type=a;this.target=b;this.i=!1}nb.prototype.g=function(){this.i=!0};var ob=function(){if(!q.addEventListener||!Object.defineProperty)return!1;var a=!1,b=Object.defineProperty({},"passive",{get:function(){a=!0}});try{q.addEventListener("test",k(),b),q.removeEventListener("test",k(),b)}catch(c){}return a}();function V(a){nb.call(this,a?a.type:"");this.relatedTarget=this.target=null;this.button=this.screenY=this.screenX=this.clientY=this.clientX=0;this.key="";this.metaKey=this.shiftKey=this.altKey=this.ctrlKey=!1;this.state=null;this.pointerId=0;this.pointerType="";this.h=null;if(a){var b=this.type=a.type,c=a.changedTouches&&a.changedTouches.length?a.changedTouches[0]:null;this.target=a.target||a.srcElement;var d=a.relatedTarget;if(d){if(Ya){a:{try{u(d.nodeName);var e=!0;break a}catch(f){}e=!1}e||(d=
+null)}}else"mouseover"==b?d=a.fromElement:"mouseout"==b&&(d=a.toElement);this.relatedTarget=d;c?(this.clientX=void 0!==c.clientX?c.clientX:c.pageX,this.clientY=void 0!==c.clientY?c.clientY:c.pageY,this.screenX=c.screenX||0,this.screenY=c.screenY||0):(this.clientX=void 0!==a.clientX?a.clientX:a.pageX,this.clientY=void 0!==a.clientY?a.clientY:a.pageY,this.screenX=a.screenX||0,this.screenY=a.screenY||0);this.button=a.button;this.key=a.key||"";this.ctrlKey=a.ctrlKey;this.altKey=a.altKey;this.shiftKey=
+a.shiftKey;this.metaKey=a.metaKey;this.pointerId=a.pointerId||0;this.pointerType="string"===typeof a.pointerType?a.pointerType:pb[a.pointerType]||"";this.state=a.state;this.h=a;a.defaultPrevented&&V.m.g.call(this)}}ja(V,nb);var pb={2:"touch",3:"pen",4:"mouse"};V.prototype.g=function(){V.m.g.call(this);var a=this.h;a.preventDefault?a.preventDefault():a.returnValue=!1};var qb="closure_listenable_"+(1E6*Math.random()|0);var rb=0;function sb(a,b,c,d,e){this.listener=a;this.proxy=null;this.src=b;this.type=c;this.capture=!!d;this.h=e;this.key=++rb;this.g=this.o=!1}function tb(a){a.g=!0;a.listener=null;a.proxy=null;a.src=null;a.h=null};function ub(a){this.src=a;this.g={};this.h=0}ub.prototype.add=function(a,b,c,d,e){var f=a.toString();a=this.g[f];a||(a=this.g[f]=[],this.h++);var g;a:{for(g=0;g<a.length;++g){var h=a[g];if(!h.g&&h.listener==b&&h.capture==!!d&&h.h==e)break a}g=-1}-1<g?(b=a[g],c||(b.o=!1)):(b=new sb(b,this.src,f,!!d,e),b.o=c,a.push(b));return b};var vb="closure_lm_"+(1E6*Math.random()|0),wb={},xb=0;function yb(a,b,c,d,e){if(d&&d.once)return zb(a,b,c,d,e);if(Array.isArray(b)){for(var f=0;f<b.length;f++)yb(a,b[f],c,d,e);return null}c=Ab(c);return a&&a[qb]?a.g(b,c,r(d)?!!d.capture:!!d,e):Bb(a,b,c,!1,d,e)}
+function Bb(a,b,c,d,e,f){if(!b)throw Error("Invalid event type");var g=r(e)?!!e.capture:!!e,h=Cb(a);h||(a[vb]=h=new ub(a));c=h.add(b,c,d,g,f);if(c.proxy)return c;d=Db();c.proxy=d;d.src=a;d.listener=c;if(a.addEventListener)ob||(e=g),void 0===e&&(e=!1),a.addEventListener(b.toString(),d,e);else if(a.attachEvent)a.attachEvent(Eb(b.toString()),d);else if(a.addListener&&a.removeListener)a.addListener(d);else throw Error("addEventListener and attachEvent are unavailable.");xb++;return c}
+function Db(){function a(c){return b.call(a.src,a.listener,c)}var b=Fb;return a}function zb(a,b,c,d,e){if(Array.isArray(b)){for(var f=0;f<b.length;f++)zb(a,b[f],c,d,e);return null}c=Ab(c);return a&&a[qb]?a.h(b,c,r(d)?!!d.capture:!!d,e):Bb(a,b,c,!0,d,e)}
+function Gb(a){if("number"!==typeof a&&a&&!a.g){var b=a.src;if(b&&b[qb])b.i(a);else{var c=a.type,d=a.proxy;b.removeEventListener?b.removeEventListener(c,d,a.capture):b.detachEvent?b.detachEvent(Eb(c),d):b.addListener&&b.removeListener&&b.removeListener(d);xb--;if(c=Cb(b)){d=a.type;if(d in c.g){var e=c.g[d],f=Va(e,a),g;(g=0<=f)&&Array.prototype.splice.call(e,f,1);g&&(tb(a),0==c.g[d].length&&(delete c.g[d],c.h--))}0==c.h&&(c.src=null,b[vb]=null)}else tb(a)}}}
+function Eb(a){return a in wb?wb[a]:wb[a]="on"+a}function Fb(a,b){if(a.g)a=!0;else{b=new V(b,this);var c=a.listener,d=a.h||a.src;a.o&&Gb(a);a=c.call(d,b)}return a}function Cb(a){a=a[vb];return a instanceof ub?a:null}var Hb="__closure_events_fn_"+(1E9*Math.random()>>>0);function Ab(a){if("function"===typeof a)return a;a[Hb]||(a[Hb]=function(b){return a.handleEvent(b)});return a[Hb]};function W(a){O.call(this);this.l=a;this.i={}}ja(W,O);var Ib=[];function Jb(a){cb(a.i,function(b,c){this.i.hasOwnProperty(c)&&Gb(b)},a);a.i={}}W.prototype.j=function(){W.m.j.call(this);Jb(this)};W.prototype.handleEvent=function(){throw Error("EventHandler.handleEvent not implemented");};function Kb(a,b,c,d){b=void 0===b?!1:b;c=void 0===c?!1:c;d=void 0===d?"editors":d;O.call(this);this.i=a||document.body;this.s=!!b;this.u=!!c;this.B=d;this.l=new W(this);a=ia(bb,this.l);this.h?a():(this.g||(this.g=[]),this.g.push(a));a=this.l;b=this.i;c=this.C;d="click";Array.isArray(d)||(d&&(Ib[0]=d.toString()),d=Ib);for(var e=0;e<d.length;e++){var f=yb(b,d[e],c||a.handleEvent,!1,a.l||a);if(!f)break;a.i[f.key]=f}}p(Kb,O);
+Kb.prototype.C=function(a){if(!(0!=a.h.button||ab&&a.ctrlKey||a.i))for(var b=a.target;b&&b!=this.i;){if(b.tagName&&"a"==b.tagName.toLowerCase()){var c=b.getAttribute("href")||b.getAttributeNS("http://www.w3.org/1999/xlink","href"),d=xa(c);if(c!=d){a:{b=void 0;Ca();try{b=ya(d)}catch(v){v=ra(v);if(v instanceof B){b=!1;break a}throw v.g;}var e;if(e=null!=b){e=(wa(),va);var f=ua;b=Object.is(e,f)||null==e&&null==f?b.toLocaleLowerCase():b.toLowerCase();e=".google.com"===b.substr(b.length-11|0,11)}b=e}if(!b)if(this.u){c=
+xa(d);if(Object.is(c,d)||null==c&&null==d)d="//www.google.com/url?q="+x(encodeURIComponent(d)),d=x(d)+"&sa=D";d+="&source="+this.B}else d=this.s?c:d;var g=d;b=void 0;c={target:"_blank",noreferrer:!0};d=window;g instanceof R?e=g:(e="undefined"!=typeof g.href?g.href:String(g),e instanceof R||(e="object"==typeof e&&e.h?e.g():String(e),gb.test(e)?e=new R(e,S):(e=String(e),e=e.replace(/(%0A|%0D)/g,""),e=e.match(fb)?new R(e,S):null)),e=e||kb);var h=void 0!==self.crossOriginIsolated;f="strict-origin-when-cross-origin";
+window.Request&&(f=(new Request("/")).referrerPolicy);var Mb="unsafe-url"===f;f=c.noreferrer;if(h&&f){if(Mb)throw Error("Cannot use the noreferrer option on a page that sets a referrer-policy of `unsafe-url` in modern browsers!");f=!1}g=c.target||g.target;h=[];for(b in c)switch(b){case "width":case "height":case "top":case "left":h.push(b+"="+c[b]);break;case "target":case "noopener":case "noreferrer":break;default:h.push(b+"="+(c[b]?1:0))}b=h.join(",");if((N("iPhone")&&!N("iPod")&&!N("iPad")||N("iPad")||
+N("iPod"))&&d.navigator&&d.navigator.standalone&&g&&"_self"!=g)c="A",b=document,c=String(c),"application/xhtml+xml"===b.contentType&&(c=c.toLowerCase()),b=c=b.createElement(c),e=e instanceof R?e:jb(e),b.href=T(e),c.target=g,f&&(c.rel="noreferrer"),b=document.createEvent("MouseEvent"),b.initMouseEvent("click",!0,!0,d,1),c.dispatchEvent(b);else if(f){if(d=mb("",d,g,b),c=T(e),d){Xa&&-1!=c.indexOf(";")&&(c="'"+c.replace(/'/g,"%27")+"'");d.opener=null;""===c&&(c="javascript:''");Pa.test(c)&&(-1!=c.indexOf("&")&&
+(c=c.replace(Ja,"&amp;")),-1!=c.indexOf("<")&&(c=c.replace(Ka,"&lt;")),-1!=c.indexOf(">")&&(c=c.replace(La,"&gt;")),-1!=c.indexOf('"')&&(c=c.replace(Ma,"&quot;")),-1!=c.indexOf("'")&&(c=c.replace(Na,"&#39;")),-1!=c.indexOf("\x00")&&(c=c.replace(Oa,"&#0;")));c='<meta name="referrer" content="no-referrer"><meta http-equiv="refresh" content="0; url='+c+'">';if(void 0===P)if(b=null,(e=q.trustedTypes)&&e.createPolicy){try{b=e.createPolicy("goog#html",{createHTML:t,createScript:t,createScriptURL:t})}catch(v){q.console&&
+q.console.error(v.message)}P=b}else P=b;c=(b=P)?b.createHTML(c):c;c=new U(c,lb);(d=d.document)&&d.write&&(d.write(c instanceof U&&c.constructor===U?c.i:"type_error:SafeHtml"),d.close())}}else(d=mb(e,d,g,b))&&c.noopener&&(d.opener=null),d&&c.noreferrer&&(d.opener=null);a.g();break}}b=b.parentNode}};function Lb(a,b,c,d){new Kb(a,void 0===b?!1:b,void 0===c?!1:c,d)}var X=["DOCS_installLinkReferrerSanitizer"],Y=q;X[0]in Y||"undefined"==typeof Y.execScript||Y.execScript("var "+X[0]);
+for(var Z;X.length&&(Z=X.shift());)X.length||void 0===Lb?Y[Z]&&Y[Z]!==Object.prototype[Z]?Y=Y[Z]:Y=Y[Z]={}:Y[Z]=Lb;}).call(this);
+</script><script nonce="">DOCS_installLinkReferrerSanitizer( undefined,  true,  true, 'docs');</script></body></html>
