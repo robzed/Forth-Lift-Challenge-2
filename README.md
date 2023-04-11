@@ -14,7 +14,7 @@ https://www.facebook.com/groups/forth2020
 
 ## About the document here
 
-The document lift2_prompt1.txt is the supplied text to ChatGPT4. Potentially it's too long for it to injest - however, I didn't check it before submitting it. Attempt 1 code is output.
+The document lift2_prompt1.txt is the supplied text to ChatGPT4. Potentially it's too long for it to injest - however, I didn't check it before submitting it. Attempt 1 code is output (lift_attempt1.fs).
 
 
 ## About the code here
