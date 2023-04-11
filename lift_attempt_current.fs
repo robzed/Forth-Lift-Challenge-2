@@ -96,17 +96,27 @@ CREATE lift_position 9 ALLOT
   THEN ;
 
 : draw_floor ( n -- )
-  ."  " dup 1 .R ." | "
-  dup up_requests draw_button
-  dup down_requests draw_button
-  stop_requests draw_button
-  ."   | " 4 0 DO
-    dup I + @ 1 = IF
-      [CHAR] . EMIT
+  ."  " DUP .
+  i 1 = IF
+    ." |  "
+  ELSE
+    i 9 = IF
+      ." |  "
     ELSE
-      32 EMIT
+      ." |--"
     THEN
-  LOOP drop ;
+  THEN
+  ."  |  "
+  i up_requests @ 0= IF ." " ELSE ."#" THEN
+  ."  |  "
+  i down_requests @ 0= IF ." " ELSE ."#" THEN
+  ."  |  "
+  i stop_requests @ 0= IF ." " ELSE ."#" THEN
+  ."  |"
+  i lift_position @ = IF ."[]" ELSE ."  " THEN
+  ." |"
+;
+
 
 : draw_lift ( -- )
   CR ." LIFT SIMULATOR" CR
