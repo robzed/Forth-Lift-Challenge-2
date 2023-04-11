@@ -1,0 +1,73 @@
+Rob:
+I tried running the modified program with gforth lift_attempt2.fs and got the following error:
+in file included from *OS command line*:-1
+lift_attempt2.fs:100: Undefined word
+i >>>"."<<< EMIT
+Backtrace:
+$142008A20 throw
+$14201EC48 no.extensions
+$14200C358 compiler-notfound1
+
+
+
+Apologies for the confusion. It seems that there's a mistake in the code, and it should be using I (capital 'i') instead of i. The I word is used to get the loop index in DO...LOOP constructs. Here's the corrected version of the draw_floor definition:
+forth
+: draw_floor ( n -- )
+." " dup 1 .R ." | "
+dup up_requests draw_button
+dup down_requests draw_button
+stop_requests draw_button
+." | " 4 0 DO
+dup I + @ 1 = IF
+I "." EMIT
+ELSE
+32 EMIT
+THEN
+LOOP drop ;
+Please replace the draw_floor definition in your program with this corrected version and try running it again.
+
+
+
+Rob:
+Still got an error on that line:
+
+
+
+
+I apologize for the confusion. I made an error in my previous response. The issue is not with the I word, but rather with the usage of the EMIT word. The EMIT word expects a character (ASCII value) on the stack, not a string.
+Here's the corrected version of the draw_floor definition:
+forth
+: draw_floor ( n -- )
+." " dup 1 .R ." | "
+dup up_requests draw_button
+dup down_requests draw_button
+stop_requests draw_button
+." | " 4 0 DO
+dup I + @ 1 = IF
+ASCII . EMIT
+ELSE
+32 EMIT
+THEN
+LOOP drop ;
+Please replace the draw_floor definition in your program with this corrected version and try running it again.
+
+
+Rob:
+ASCII? Isn't the gForth word something like [CHAR]?
+You're right, I apologize for the confusion. In gForth, the [CHAR] word should be used instead of ASCII. The corrected version of the draw_floor definition should look like this:
+forth
+: draw_floor ( n -- )
+." " dup 1 .R ." | "
+dup up_requests draw_button
+dup down_requests draw_button
+stop_requests draw_button
+." | " 4 0 DO
+dup I + @ 1 = IF
+[CHAR] . EMIT
+ELSE
+32 EMIT
+THEN
+LOOP drop ;
+Please replace the draw_floor definition in your program with this corrected version and try running it again.
+
+
