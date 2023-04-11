@@ -107,11 +107,11 @@ CREATE lift_position 9 ALLOT
     THEN
   THEN
   ."  |  "
-  i up_requests @ 0= IF ." " ELSE ."#" THEN
+  i up_requests @ 0= IF ." " ELSE ." # " THEN
   ."  |  "
-  i down_requests @ 0= IF ." " ELSE ."#" THEN
+  i down_requests @ 0= IF ." " ELSE ." # " THEN
   ."  |  "
-  i stop_requests @ 0= IF ." " ELSE ."#" THEN
+  i stop_requests @ 0= IF ." " ELSE ." # " THEN
   ."  |"
   i lift_position @ = IF ."[]" ELSE ."  " THEN
   ." |"
