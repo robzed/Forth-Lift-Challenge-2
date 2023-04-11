@@ -113,7 +113,8 @@ CREATE lift_position 9 ALLOT
   ."  |  "
   i stop_requests @ 0= IF ." " ELSE ." # " THEN
   ."  |"
-  i lift_position @ = IF ."[]" ELSE ."  " THEN
+  i lift_position @ = IF ." [ " ELSE ."   " THEN
+  i lift_position @ = IF ." ]" ELSE ."  " THEN
   ." |"
 ;
 
