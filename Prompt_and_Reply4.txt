@@ -1,0 +1,322 @@
+Rob:
+That's a bit better, we have a different error now: 
+
+
+ChatGPT:
+I apologize for any confusion caused. To provide more accurate assistance, I'll need more information about the new error you are encountering. Please provide the error message or any relevant information that can help me better understand the issue.
+
+
+
+Rob:
+It stops at line 145 (which is the main call at the bottom of the file)... the error is as follows:
+LIFT SIMULATOR
+#  UP DN STOP   LIFT
+============================
+ 0| ###  | 
+in file included from *OS command line*:-1
+lift_attempt3.fs:145: Invalid memory address
+>>>main<<<
+Backtrace:
+$123042F38 @ 
+$0 
+$4 
+$1230431C0 draw_floor 
+$1 
+$7 
+$1230437C0 draw_lift 
+$123043870 lift_simulator 
+
+
+
+
+ChatGPT:
+It seems that there is an issue with the memory access in the program, possibly due to some uninitialized or improperly initialized values. Please try adding the following lines at the beginning of the program to initialize the up_requests, down_requests, stop_requests, and lift_position arrays:
+
+forth
+
+CREATE up_requests 9 ALLOT
+CREATE down_requests 9 ALLOT
+CREATE stop_requests 9 ALLOT
+CREATE lift_position 9 ALLOT
+
+These lines will create and allocate memory for the arrays used throughout the program.
+
+Please add these lines at the beginning of the program and try running it again. If the issue persists, please let me know.
+
+
+
+
+Rob:
+I’ve still got the same error. How about we debug pieces of the program. Here is a transcript of me doing that:
+
+gforth                 
+Gforth 0.7.3, Copyright (C) 1995-2008 Free Software Foundation, Inc.
+Gforth comes with ABSOLUTELY NO WARRANTY; for details type `license'
+Type `bye' to exit
+include lift_attempt3.fs 
+LIFT SIMULATOR
+#  UP DN STOP   LIFT
+============================
+ 0|      | 
+lift_attempt3.fs:150: Invalid memory address
+>>>main<<<
+Backtrace:
+$12A842F90 @ 
+$0 
+$4 
+$12A843218 draw_floor 
+$1 
+$7 
+$12A843818 draw_lift 
+$12A8438C8 lift_simulator 
+  ok
+draw_lift 
+LIFT SIMULATOR
+#  UP DN STOP   LIFT
+============================
+ 0|      | 
+:3: Invalid memory address
+>>>draw_lift<<<
+Backtrace:
+$12A842F90 @ 
+$0 
+$4 
+$12A843218 draw_floor 
+$1 
+$7 
+1 draw_floor  1|      | 
+:4: Invalid memory address
+1 >>>draw_floor<<<
+Backtrace:
+$12A842F90 @ 
+$0 
+$4 
+1 up_requests  ok
+.s <2> 1 5008270304  ok
+draw_button   ok
+1 down_requests  ok
+draw_button   ok
+stop_requests  ok
+draw_button   ok
+.s <2> 1 1  ok
+
+
+
+ChatGPT:
+Thank you for providing more details about the debugging process. It seems that the issue might be related to the draw_floor word. I noticed a potential problem with the i loop variable in the draw_floor definition.
+
+Please replace the draw_floor definition with the following code:
+
+forth
+
+: draw_floor ( n -- )
+  ."  " DUP .
+  i 1 = IF
+    ." |  "
+  ELSE
+    i 9 = IF
+      ." |  "
+    ELSE
+      ." |--"
+    THEN
+  THEN
+  ."  |  "
+  i up_requests @ 0= IF ." " ELSE ."#" THEN
+  ."  |  "
+  i down_requests @ 0= IF ." " ELSE ."#" THEN
+  ."  |  "
+  i stop_requests @ 0= IF ." " ELSE ."#" THEN
+  ."  |"
+  i lift_position @ = IF ."[]" ELSE ."  " THEN
+  ." |"
+;
+
+The changes made are replacing the occurrences of i with i up_requests @, i down_requests @, i stop_requests @, and i lift_position @ as appropriate.
+
+This should resolve the memory access issue in the draw_floor word. Please try running the program again and let me know if you still encounter any issues.
+
+
+
+Rob:
+It has a problem with ."#" ... it is the lack of space after the ."  ? 
+lift_attempt3.fs:110: Undefined word
+  i up_requests @ 0= IF ." " ELSE >>>."#"<<< THEN
+Backtrace:
+$147808A20 throw 
+$14781EC48 no.extensions 
+$14780C358 compiler-notfound1 
+
+
+
+ChatGPT:
+Apologies for the confusion. You're right; the issue is caused by the lack of space after the .". In Forth, adjacent string literals are concatenated, and the interpreter tries to find a word named ."#".
+
+Please update the draw_floor definition with spaces added after the .":
+
+forth
+
+: draw_floor ( n -- )
+  ."  " DUP .
+  i 1 = IF
+    ." |  "
+  ELSE
+    i 9 = IF
+      ." |  "
+    ELSE
+      ." |--"
+    THEN
+  THEN
+  ."  |  "
+  i up_requests @ 0= IF ." " ELSE ." # " THEN
+  ."  |  "
+  i down_requests @ 0= IF ." " ELSE ." # " THEN
+  ."  |  "
+  i stop_requests @ 0= IF ." " ELSE ." # " THEN
+  ."  |"
+  i lift_position @ = IF ."[]" ELSE ."  " THEN
+  ." |"
+;
+
+With these changes, the program should run without issues. Please try running the updated program and let me know if there are any further problems.
+
+
+
+Rob:
+And I think with the ."[]"?
+lift_attempt_current.fs:116: Undefined word
+  i lift_position @ = IF >>>."[]"<<< ELSE ."  " THEN
+Backtrace:
+$151008A20 throw 
+$15101EC48 no.extensions 
+$15100C358 compiler-notfound1 
+
+
+
+ChatGPT:
+You're correct. The same issue is present in the "[]" part as well. Please add a space after the ." to fix the issue:
+
+forth
+
+: draw_floor ( n -- )
+  ."  " DUP .
+  i 1 = IF
+    ." |  "
+  ELSE
+    i 9 = IF
+      ." |  "
+    ELSE
+      ." |--"
+    THEN
+  THEN
+  ."  |  "
+  i up_requests @ 0= IF ." " ELSE ." # " THEN
+  ."  |  "
+  i down_requests @ 0= IF ." " ELSE ." # " THEN
+  ."  |  "
+  i stop_requests @ 0= IF ." " ELSE ." # " THEN
+  ."  |"
+  i lift_position @ = IF ." [ " ELSE ."   " THEN
+  i lift_position @ = IF ." ]" ELSE ."  " THEN
+  ." |"
+;
+
+With these changes, the program should run without issues. Please try running the updated program and let me know if there are any further problems.
+
+
+
+Rob:
+The definition for the word clear_requests appears broken. When I type "1 clear_requests" I get: 
+:4: Invalid memory address
+1 >>>clear_requests<<<
+Backtrace:
+$14B042548 ! 
+$0 
+$7 
+
+
+
+ChatGPT:
+Apologies for the confusion. The issue seems to be caused by the usage of the i variable in the clear_requests word. It is already being used in the outer loop (i variable in the FOR loop), so using it inside the clear_requests word is causing the problem.
+
+We can fix this issue by using a different variable, such as j. Here's the modified clear_requests word:
+
+forth
+
+: clear_requests ( n -- )
+  0
+  swap 0 ?DO
+    j up_requests !
+    j down_requests !
+    j stop_requests !
+    1 +LOOP
+  LOOP
+;
+
+Now, when you run 1 clear_requests, it should work without throwing an error.
+
+
+
+Rob:
+That's almost right - but it's not about 'i' being used in the outer loop. The original definition didn't contain any reference to the arrays being cleared, it just cleared. Also your modified code doesn't actually index into the arrays - just set the first value to j. So I think each line should be like "0 i up_requests + !" I also think when you create your array, it's only one byte for each floor, since ALLOT only allocates bytes. Maybe CREATE stop_requests floors 1 + CELLS ALLOT
+would be better
+
+
+
+
+ChatGPT:
+Apologies for the confusion, and you're right about the issues in my previous response. Here's the corrected clear_requests word:
+
+forth
+
+: clear_requests ( n -- )
+  0
+  swap 0 ?DO
+    i up_requests + 0 !
+    i down_requests + 0 !
+    i stop_requests + 0 !
+  1 +LOOP
+;
+
+And yes, you are correct about the allocation of memory for the arrays. To allocate memory as cells, you can use the CELLS word as you suggested. Modify the array definitions as follows:
+
+forth
+
+floors 1 + CELLS ALLOCATE THROW CONSTANT up_requests
+floors 1 + CELLS ALLOCATE THROW CONSTANT down_requests
+floors 1 + CELLS ALLOCATE THROW CONSTANT stop_requests
+
+Now, the clear_requests word should work correctly, and the arrays will have the appropriate amount of memory allocated for each floor.
+
+
+
+
+Rob:
+: clear_requests ( n -- )
+  0
+  swap 0 ?DO
+    i up_requests + 0 !
+    i down_requests + 0 !
+    i stop_requests + 0 !
+  1 +LOOP
+;
+I think that requires a swap before the ! (since it takes data address). 
+
+
+
+
+ChatGPT:
+You're right, I apologize for the oversight. The ! word takes the data first, followed by the address. The correct definition for clear_requests should have a SWAP before each !. Here's the updated definition:
+
+forth
+
+: clear_requests ( n -- )
+  0
+  swap 0 ?DO
+    i up_requests + 0 swap !
+    i down_requests + 0 swap !
+    i stop_requests + 0 swap !
+  1 +LOOP
+;
+
+Now the clear_requests word should work correctly.
+

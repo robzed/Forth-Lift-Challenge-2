@@ -4,20 +4,20 @@ VARIABLE lift_pos
 VARIABLE lift_dir
 0 lift_dir !
 1 lift_pos !
-CREATE up_requests 9 ALLOT
-CREATE down_requests 9 ALLOT
-CREATE stop_requests 9 ALLOT
-CREATE lift_position 9 ALLOT
 
-\ CREATE up_requests floors 1 + ALLOT
-\ CREATE down_requests floors 1 + ALLOT
-\ CREATE stop_requests floors 1 + ALLOT
+floors 1 + CELLS ALLOCATE THROW CONSTANT up_requests
+floors 1 + CELLS ALLOCATE THROW CONSTANT down_requests
+floors 1 + CELLS ALLOCATE THROW CONSTANT stop_requests
 
 \ Helper words
 : clear_requests ( n -- )
-  floors 1 + 0 DO
-    0 i + !
-  LOOP ;
+  0
+  swap 0 ?DO
+    i up_requests + 0 swap !
+    i down_requests + 0 swap !
+    i stop_requests + 0 swap !
+  1 +LOOP
+;
 
 : valid_floor? ( n -- flag )
   dup 1 >= swap floors <= and ;
@@ -158,4 +158,7 @@ CREATE lift_position 9 ALLOT
 : main
   lift_simulator ;
 
-main
+: show_status
+
+;
+
