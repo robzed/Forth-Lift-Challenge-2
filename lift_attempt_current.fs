@@ -4,9 +4,14 @@ VARIABLE lift_pos
 VARIABLE lift_dir
 0 lift_dir !
 1 lift_pos !
-CREATE up_requests floors 1 + ALLOT
-CREATE down_requests floors 1 + ALLOT
-CREATE stop_requests floors 1 + ALLOT
+CREATE up_requests 9 ALLOT
+CREATE down_requests 9 ALLOT
+CREATE stop_requests 9 ALLOT
+CREATE lift_position 9 ALLOT
+
+\ CREATE up_requests floors 1 + ALLOT
+\ CREATE down_requests floors 1 + ALLOT
+\ CREATE stop_requests floors 1 + ALLOT
 
 \ Helper words
 : clear_requests ( n -- )
