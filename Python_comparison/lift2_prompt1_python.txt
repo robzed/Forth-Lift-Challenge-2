@@ -1,0 +1,135 @@
+Python Lift Challenge #2
+
+The Challenge
+1 - Simulate some kind of lift graphics so we can see which buttons are pressed and where the lift is etc.
+2 - Process each floor’s UP/DOWN and the lift destination “buttons” (console keys or real buttons etc).
+3 - Make it respond like a real lift - if it is going up it will continue to do so if it still has floors requested.
+4 - Only a single lift is used with a minimum of 6 floors and there is no need to go beyond 9 floors for this sim.
+5 - We are not concerned about the number of passengers or timing - just the sequence of actions needed.
+6 - Allow for a PLAY mode where a long sequence can be played back - (useful for testing entries)
+
+AIM OF THE CHALLENGE
+Since we are promoting Python we also want show how simple and elegant and readable Python code can be. By all means get it functional but consider rewriting it if necessary so that you end up with a melodious song rather than a squawking dodo. If others can look at your code and understand it easily, then you are certainly on the right track. 
+
+INTRO
+In the old days of computer graphics when the world was dominated by teletype machines or video terminals the bored geek would create art from ASCIi characters. The fact that much of this “art” was of the curvaceous kind indicates the young age of these geeks and of the two things that were on their mind, code and curves. Computers may have changed but for many of us who use these powerful microcontroller chips we are still limited to serial ports. So let’s use them in a similar way, but instead of curves we will elevate our thinking and create a programatic animation of these floors, an indication of which up/down buttons have been pressed, and also which floors have been selected, and of course the position of the lift car itself. These are just the basics but good enough to start with.
+
+Here is an example of how that could look:
+
+LIFT SIMULATOR
+#  UP DN STOP   LIFT
+===========================
+8             |      |
+--------------|      |--
+7          #  |      |
+--------------|      |--
+6             |      |
+--------------|      |--
+5             |      |
+--------------|      |--
+4             | [UP] |
+--------------|      |--
+3  #          |      |
+--------------|      |--
+2             |      |
+--------------|      |--
+1  #          |      |
+--------------|      |--
+
+
+ In this graphic we can see that while the lift car is now at the Fourth floor and going up, that it would stop at the 5th floor since the up button has been pressed there.
+
+ Afterwards it will travel to its destination on the 7th floor although in real-life people from the 5th floor might select another floor too.
+
+ Once it has reached the final floor it will proceed down to the 1st floor where perhaps impatient people have jabbed the up button many times already in the hope that it will make it go faster :
+
+
+Since any serial terminal can represent this, even a teletype if you happen to be a retro-geek, then this is something you can write some Python code for that takes information from variables that represent the lift and floor request buttons, the number of floors and the current position of the lift car. 
+
+HINT: Define some functions for floor and lift requests, so that you can type 5 UP to request a lift going up from the 5th floor (as shown). Conversely 8 DOWN would be someone on the 8th floor wanting to go down. In the lift you might press [1] to go to the 1st floor so in Python we can type 1 GO which will select the 1st floor as a destination to stop at. Add another function to redraw the graphic as required and I like to clear the screen which also returns to the top  (12 EMIT normally does this).
+
+At this stage you have a “working model” that you can interact with. 
+
+
+SCENARIO:
+First thing in the morning the lift has been left at the 1st floor, and early Ed, the first person walks into the building and catches the lift to the 6th floor. In the meantime more people have entered the building and are pressing the UP button on the 1st floor. So the lift detects that request and comes back down to the 1st floor where it opens the door (optional) and people enter and press buttons. In this case we are not worried about how many people as it is a virtual lift with virtually unlimited capacity 🙂  and we are not worried about timing either, only the logical sequence of operation and being able to visualize the simulation.
+
+Now this second lot of people are in the lift and some press 2 and some press 3 and some press 6. Then the lift travels to the 2nd floor, then the 3rd, and then the 6th. Meanwhile Fred on the 3rd floor remembers he has left his laptop in his car parked outside, so he presses the DOWN button (Also consider what if Fred had pressed the UP button by mistake). While the lift is coming back down to service this request there are many more people on the 1st floor banging that UP button madly, having run late for work.
+
+So the lift goes down and stops at the 3td floor where forgetful Fred presses the 1st floor button. The lift proceeds without incident to the 1st floor where Fred has to fight his way out past all the others cramming their way in.
+
+Then the couriers start turning up, going to many floors and the wrong floors. Create any fanciful sequence you perceive possible while others are still using the lift too. Don’t forget lunch time etc. In India the wives will have made some hot food for their working husbands which is now being delivered by dabbawalas in time for lunch! All those ups and downs!
+
+PLAY MODE
+Rather than a purely random mode perhaps we could play back a sequence instead. We could simulate the whole day or lunch time etc and play back that sequence a bit like an old pianola and so you can use the exact same sequence to test improvements in the operation of your code. This same mode can be used to test various approaches as well as the entries to the challenge itself.
+
+
+PYTHON CONSOLE OPERATION
+We have to assume that the Python you are using does not have multi-tasking so you are relying on the console for operating this simulation. What can happen is that you can have words to request UP or DOWN with a floor parameter so the lift knows which floor requested this. Then the lift car itself has buttons that are pressed by passing the floor number to a FLOOR word (or GO for short).
+
+
+BUTTONS
+
+How might we run the above scenario from the Python console?
+
+	
+
+EDIT: I decided I would leave the main loop running continually with a 2 second delay each loop where it checks the buttons, computes the next move, and moves the lift up or down half a floor if needed while updating the display to show the position and also all the “lit buttons” etc. So I detect console keys 1 to 9 and save them in a variable.
+
+  Keys U D and G will take that variable and perform the UP DOWN or GO request. Hitting escape though exits the loop. Maybe it won’t hurt to display this variables etc along with the lift graphic as well, it’s up to you.
+
+My main loop:
+def RUN():
+   while not buttons():
+       SHOW() COMPUTE() STEP()
+       timer.sleep(2) 
+
+	
+* SHOW() draws the lift and floors and the state of the buttons
+* COMPUTE() works out what to do next (not so simple)
+* STEP() will then move the lift half a floor if necessary
+
+* timer.sleep(2) is slow enough to interact with the simulation
+* BUTTONS() checks for 1 to 9 and U D G and if ESC it returns with a true rather than a false
+
+Here is a purely console driven suggestion too:
+
+CONSOLE
+	
+
+DESCRIPTION
+
+1 UP    Lift is already at the 1st floor so the door opens and Ed enters
+6 GO    Ed presses the button for the 6th floor
+RUN     Run the lift operation at a slow rate for visual simulation. Any key to escape.
+1 UP 1 UP 1 UP    While the lift is ascending people are pressing buttons - let’s pretend etc
+RUN     Get that simulation running again, and ED makes it to the 6th floor
+        Now the lift comes down again towards the 1st floor
+2 GO 3 GO 6 GO     The doors open and people enter and press buttons for the 2nd, 3rd, and 6th.
+RUN     Run the lift operation at a slow rate for visual simulation. Any key to escape.
+        We see the lift stop at the 2nd floor and then shortly thereafter proceeds up
+        We see the lift stop at the 3rd floor - and proceeds up
+
+1 UP 1 UP 1 UP 1 UP RUN    Late Larry and company are madly punching the UP button on the 1st floor.
+
+3 DOWN RUN    Fred needs to go get his laptop but the lift is still going up (keep it going)
+
+        The lift stops at the 6th floor then proceeds down to the 3rd for Fred
+
+1 GO RUN   Fred presses the 1st floor button although the lift is already going there
+        The lift makes it to the 1st floor while Fred struggles to get out.
+        Now they all get in and press buttons etc
+
+
+So in this operation we manually control the simulation although once it is running it proceeds at a slow enough rate to simulate the lift moving if it needs to and gives us enough time to interrupt the sim to introduce new requests from the console. Your Python might need to look for an escape key during RUN perhaps or it might echo and preserve the key upon exit without needing an escape. Others may use a background polling routine or multitask the RUN operation in which case we don’t need to type RUN normally, although a HALT might be useful to give us time to debug our code.
+
+
+NOTES:
+There is no DOWN button on the 1st floor so we are not worried about basements, just floors or levels. Also too, there is no UP button on the top floor either for very obvious reasons. So 1 DOWN is ignored as is 6 UP if the top floor is 6 etc.
+
+We use the term lift and elevator interchangeably, and lift also refers to the car that carries people  itself.
+
+The number of passengers or the number of times the buttons are pressed are irrelevant for this simulation and the purpose of this challenge. In reality even though the lift may weigh the load it really only responds to the requests anyway.
+
+
+Write code in Python to create this lift program.

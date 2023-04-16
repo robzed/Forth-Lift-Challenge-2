@@ -1,0 +1,7 @@
+Here's a simple implementation of the lift challenge:
+
+<see lift_attempt.py>
+
+This code defines a Lift class and a simulate_lift function to run the simulation. The Lift class handles lift requests, floor selection, lift movement, and displays the current state of the lift. The simulate_lift function runs the simulation loop, accepting user input for lift requests and floor selection.
+
+To run the simulation, simply execute the code. The simulation will display the lift's state and accept user input for floor requests and floor selection. To stop the simulation, enter 'q'.
