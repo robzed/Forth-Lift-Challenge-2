@@ -1,0 +1,12 @@
+This text describes the Forth2020 Lift Challenge #2, which is to create a lift (elevator) simulation using the Forth programming language. The simulation should demonstrate simple and elegant Forth code while also being functional and easy to understand. The challenge requires the following:
+
+1. Simulate lift graphics to show which buttons are pressed and the lift's position.
+2. Process each floor's UP/DOWN requests and the lift destination buttons.
+3. Make the lift respond realistically, continuing in the same direction if there are more floors requested.
+4. Use a single lift with a minimum of 6 floors, but not exceeding 9 floors.
+5. Ignore the number of passengers and timing, focusing only on the sequence of actions.
+6. Include a PLAY mode for playing back a long sequence, which is useful for testing.
+
+The simulation should be created using ASCII art and interacted with through a console. The console should be able to request UP or DOWN and select floors as destinations. There is no need to simulate the number of passengers or button presses, as the focus is on the logical sequence of actions and visualizing the simulation.
+
+The challenge also includes a scenario to help guide the creation of the simulation, which involves a sequence of events that would occur in a real-life lift. Additionally, the challenge provides hints on defining words for floor and lift requests and offers suggestions for implementing the simulation in the Forth console.
