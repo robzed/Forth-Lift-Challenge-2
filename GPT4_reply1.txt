@@ -1,6 +1,6 @@
 Here's a simple implementation of the lift program in gForth:
 
-<see lift_attemp1.fs>
+<see lift_attempt1.fs>
 
 This implementation provides a simple lift simulator with ASCII graphics. It implements the logic for the UP, DOWN, and GO buttons and takes into consideration the restrictions on the buttons for the first and last floors. The lift will respond to button presses and move accordingly. The graphics will update every 1000 ms to reflect the current state of the lift.
 
