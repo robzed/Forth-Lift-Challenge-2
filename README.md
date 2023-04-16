@@ -21,10 +21,14 @@ The document lift2_prompt1.txt is the supplied text to ChatGPT4. Potentially it'
 
 Because I was late to the game, I decided to get ChatGPT4 to help me. It's first attempt was not bad, but certainly won't run without changes. 
 
+There is also a comparison with CharGPT4 generating Python in the folder 'Python_comparison'.
+
 
 ## Copyright and License
 
 The document Forth2020 Lift Challenge #2 is by Peter Jakacki. 
 
-Some of the code contains changes and novel code additions and prompts by me. It's not just the output of ChatGPT4. Therefore this code is Copyright (c) 2023 Rob Probin. However, it's licensed under the premissive MIT license - which gives a lot of flexibility.
+Some of the code contains changes and novel code additions and prompts by me. It's not just the output of ChatGPT4. Therefore this code is Copyright (c) 2023 Rob Probin. However, it's licensed under the premissive MIT license - which gives a lot of flexibility. 
+
+As for pure ChatGPT4 output, you'll need to see your local country copyright or intellectual office... because it's still a moving target. 
 
